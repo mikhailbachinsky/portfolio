@@ -1,0 +1,69 @@
+.hero {
+.hero__container {
+.hero__content {
+.hero__text-group {
+.hero__titles {
+.hero__name {
+.hero__role {
+.hero__description {
+.hero__buttons {
+.hero__photo {
+.hero__line {
+.hero__line--m {
+.hero__line--b {
+@media (max-width: 860px) {
+.hero__line--m,
+.hero__line--b,
+@media (prefers-reduced-motion: reduce) {
+@media (max-width: 1199px) {
+  .hero__container {
+  .hero__content {
+  .hero__text-group {
+  .hero__titles {
+  .hero__name {
+  .hero__role {
+  .hero__description {
+  .hero__buttons {
+  .hero__photo {
+  .hero__line--m {
+  .hero__line--b {
+@media (max-width: 979px) {
+  .hero__container {
+  .hero__content {
+  .hero__text-group {
+  .hero__titles {
+  .hero__name {
+  .hero__role {
+  .hero__description {
+  .hero__buttons {
+  .hero__photo {
+  .hero__line--m {
+  .hero__line--b {
+@media (max-width: 639px) {
+  .hero__container {
+  .hero__content {
+  .hero__text-group {
+  .hero__titles {
+  .hero__name {
+  .hero__role {
+  .hero__description {
+  .hero__buttons {
+  .hero__photo {
+  .hero__line--m {
+  .hero__line--b {
+@media (max-width: 479px) {
+  .hero__container {
+  .hero__content {
+  .hero__text-group {
+  .hero__titles {
+  .hero__name {
+  .hero__role {
+  .hero__description {
+  .hero__buttons {
+  .hero__photo {
+  .hero__line--m {
+  .hero__line--b {
+@media (max-width: 600px) {
+@media (prefers-reduced-motion: reduce) {
+@media (hover: hover) and (pointer: fine) {
+@media (prefers-reduced-motion: reduce) {

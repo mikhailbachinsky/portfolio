@@ -1,0 +1,1379 @@
+@import "tailwindcss";
+
+
+@layer base {
+  :root {
+    --font-serif: "Kurale", Georgia, serif;
+    --font-sans: "Geologica", -apple-system, BlinkMacSystemFont, sans-serif;
+    --section-padding: clamp(4.5rem, 7vw, 6.5rem);
+    --header-height: 48px;
+  }
+
+  html, body {
+    max-width: 100% !important;
+    overflow-x: clip !important;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #F9F7F2;
+    color: #1C1C1C;
+    overflow-x: clip !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+
+  img, video {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
+
+  @media (max-width: 767px) {
+    ::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    html, body {
+      scrollbar-width: none !important;
+    }
+  }
+
+  /* Hide default cursor on desktop when custom arrow cursor is enabled */
+  @media (hover: hover) and (pointer: fine) {
+    html.custom-cursor-enabled,
+    html.custom-cursor-enabled * {
+      cursor: none !important;
+    }
+  }
+
+  /* Kurale specifically for editorial headings & titles:
+     Zero tracking, font-synthesis none to prevent synthetic bolding/baseline distortion */
+  h1:not(.font-sans), h2:not(.font-sans), h3:not(.font-sans), h4:not(.font-sans), h5:not(.font-sans), h6:not(.font-sans), .font-editorial, .font-serif, .font-kurale {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-style: normal;
+    -webkit-font-synthesis: none;
+    font-synthesis: none;
+    letter-spacing: 0;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: baseline;
+  }
+
+  /* Geologica for body, UI, numbers and general elements */
+  p, button, a, input, select, textarea, .font-sans, h1.font-sans, h2.font-sans, h3.font-sans, h4.font-sans, h5.font-sans, h6.font-sans {
+    font-family: var(--font-sans);
+  }
+}
+
+/* Standalone utility classes to override any nested resets */
+.font-editorial, .font-serif, .font-kurale {
+  font-family: var(--font-serif) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  -webkit-font-synthesis: none !important;
+  font-synthesis: none !important;
+  letter-spacing: 0 !important;
+  font-kerning: normal !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-sans {
+  font-family: var(--font-sans) !important;
+}
+
+/* Subtle warm paper grain texture */
+.bg-grain {
+  background-image: radial-gradient(rgba(28, 28, 28, 0.04) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+.bg-paper {
+  background-color: #F9F7F2;
+}
+
+.bg-paper-card {
+  background-color: #FFFFFF;
+}
+
+/* Hairline borders in monochrome #1C1C1C */
+.border-hairline {
+  border-color: rgba(28, 28, 28, 0.1);
+}
+
+.border-hairline-strong {
+  border-color: rgba(28, 28, 28, 0.2);
+}
+
+/* Global clean scrollbar suppression for horizontal navigation and carousels */
+.no-scrollbar,
+nav,
+[role="tablist"],
+.overflow-x-auto {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar,
+nav::-webkit-scrollbar,
+[role="tablist"]::-webkit-scrollbar,
+.overflow-x-auto::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Scrollbar for light theme - overlay style positioned below header */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 48px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(28, 28, 28, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(28, 28, 28, 0.4);
+}
+
+.stf__wrapper,
+.stf__block,
+.stf__parent,
+.page-flip-book-container {
+  overflow: visible !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+@keyframes chapterSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes selectorPulseGlow {
+  0% {
+    background-color: rgba(28, 28, 28, 0.08);
+    box-shadow: 0 0 0 2px rgba(28, 28, 28, 0.12);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 0px transparent;
+  }
+}
+
+@keyframes menuSpringScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.65) translateY(18px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.03) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes menuSpringScaleOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.68) translateY(14px);
+  }
+}
+
+.animate-menu-scale-in {
+  animation: menuSpringScaleIn 0.36s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-menu-scale-out {
+  animation: menuSpringScaleOut 0.22s cubic-bezier(0.3, 0, 0.8, 0.15) forwards;
+}
+
+@keyframes popoverScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-chapter-title {
+  animation: chapterSlideUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-selector-glow {
+  animation: selectorPulseGlow 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-popover-in {
+  animation: popoverScaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Sticky sidebar with safety max-height and hidden scrollbar (desktop only) */
+@media (min-width: 1024px) {
+  .sticky-sidebar-container {
+    max-height: calc(100vh - 5.5rem);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .sticky-sidebar-container::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Typography balancing to eliminate dangling lines (widows) */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p, .leading-relaxed, .text-pretty {
+  text-wrap: pretty;
+}
+
+/* Responsive left navigation: switches to 2 columns only when viewport height is truly restricted */
+@media (max-height: 600px) and (min-width: 1024px) {
+  .compact-nav-grid {
+    display: block !important;
+    columns: 2 !important;
+    column-gap: 0.75rem !important;
+    margin-top: 0.75rem !important;
+    padding-top: 0.5rem !important;
+  }
+  .compact-nav-grid > a,
+  .compact-nav-grid > button {
+    display: block !important;
+    break-inside: avoid !important;
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+    margin-left: 0 !important;
+    padding-left: 0.5rem !important;
+    border-left-width: 2px !important;
+    font-size: 0.75rem !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    margin-bottom: 0.25rem !important;
+  }
+}@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marqueeScroll 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Google Material You 3 Expressive motion system & exit/enter animations */
+:root {
+  --m3-easing-standard: cubic-bezier(0.2, 0.8, 0.4, 1);
+  --m3-easing-entrance: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --m3-easing-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --m3-easing-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+@keyframes m3FadeScaleIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes m3FadeScaleOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+}
+
+.m3-enter-smooth {
+  animation: m3FadeScaleIn 0.45s var(--m3-easing-entrance) forwards;
+}
+
+.m3-exit-smooth {
+  animation: m3FadeScaleOut 0.35s var(--m3-easing-exit) forwards;
+}
+
+/* Expressive micro-interaction for outer cards: noticeable corner rounding on hover (rounded-xl to rounded-3xl), micro-scale, no shadows, no opacity changes */
+.m3-card-interactive, .card-spring-rounding {
+  transition: border-radius 0.38s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.3s ease-out,
+              transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: none !important;
+}
+
+.m3-card-interactive:hover, .card-spring-rounding:hover {
+  border-radius: 1.85rem !important; /* ~30px rounding on hover! */
+  border-color: rgba(28, 28, 28, 0.35) !important;
+  background-color: #FAF8F5;
+  transform: scale(1.015);
+  box-shadow: none !important;
+}
+
+.m3-card-interactive:active, .card-spring-rounding:active {
+  background-color: #F3EFE6;
+  transform: scale(0.99);
+  transition-duration: 0.12s;
+  box-shadow: none !important;
+}
+
+/* Expressive micro-interaction for inner/nested sub-cards inside cards: corner rounding on direct hover */
+.inner-card-interactive {
+  transition: border-radius 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.3s ease-out,
+              background-color 0.3s ease-out,
+              transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: none !important;
+}
+
+.inner-card-interactive:hover {
+  border-radius: 1.35rem !important; /* ~22px rounding on direct hover */
+  border-color: rgba(28, 28, 28, 0.35) !important;
+  transform: scale(1.02);
+  box-shadow: none !important;
+}
+
+/* Expressive micro-interaction for buttons, badges, and chips: STRICTLY NO ROTATION TILT (rotate-0), corner rounding shift, micro-scale, no shadows, no opacity changes */
+.m3-interactive-button, .btn-spring-interactive {
+  transition: border-radius 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              border-color 0.25s var(--m3-easing-standard),
+              background-color 0.25s var(--m3-easing-standard),
+              color 0.25s var(--m3-easing-standard);
+  will-change: border-radius, transform;
+  box-shadow: none !important;
+}
+
+.m3-interactive-button:hover, .btn-spring-interactive:hover {
+  border-radius: 1.25rem !important; /* rounds more from rounded-lg to ~20px */
+  transform: scale(1.035) rotate(0deg) !important; /* STRICTLY 0 DEGREE ROTATION - NO TILT EVER */
+  box-shadow: none !important;
+}
+
+.m3-interactive-button:active, .btn-spring-interactive:active {
+  transform: scale(0.96) rotate(0deg) !important;
+  transition-duration: 0.1s;
+  box-shadow: none !important;
+}
+
+/* Machete Wood-Notch Chop Animation for Logo */
+@keyframes logoMacheteNotch {
+  0% {
+    transform: scale(1) rotate(0deg);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  20% {
+    transform: scaleX(1.1) scaleY(0.9) rotate(-3deg);
+    clip-path: polygon(0% 0%, 92% 0%, 100% 25%, 100% 100%, 8% 100%, 0% 75%);
+  }
+  45% {
+    transform: scaleX(0.95) scaleY(1.08) rotate(2deg);
+    clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+  }
+  70% {
+    transform: scaleX(1.05) scaleY(0.97) rotate(-1deg);
+    clip-path: polygon(0% 0%, 97% 0%, 100% 92%, 3% 100%);
+  }
+  100% {
+    transform: scaleX(1.03) scaleY(1) rotate(0deg);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+.animate-logo-machete:hover {
+  animation: logoMacheteNotch 0.42s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
+}
+
+/* SVG Trim Path Animation Utility */
+@keyframes svgTrimDraw {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-trim-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: svgTrimDraw 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Nature Organic Rustle Animation for Theme Icons */
+@keyframes natureLeafRustle {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.15); }
+  50% { transform: rotate(12deg) scale(1.2); }
+  75% { transform: rotate(-5deg) scale(1.12); }
+  100% { transform: rotate(0deg) scale(1.1); }
+}
+
+.animate-nature-hover:hover {
+  animation: natureLeafRustle 0.5s ease-in-out forwards;
+}
+
+/* Smooth Palette Color Shimmer Effect for Palette Cards */
+@keyframes paletteColorShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-palette-shimmer:hover {
+  background: linear-gradient(135deg, rgba(250, 248, 245, 1) 0%, rgba(242, 238, 226, 0.9) 50%, rgba(250, 248, 245, 1) 100%);
+  background-size: 200% 200%;
+  animation: paletteColorShimmer 1.8s ease infinite;
+}
+
+/* Uniform Palette Swatch Card System (Soft Parchment Glow) */
+.ds-palette-card {
+  transition: border-color 0.25s ease-out,
+              background-color 0.25s ease-out,
+              box-shadow 0.25s ease-out;
+  will-change: border-color, background-color, box-shadow;
+}
+
+.ds-palette-card:hover {
+  border-color: rgba(28, 28, 28, 0.35) !important;
+  background-color: #F3EFE6 !important;
+  box-shadow: 0 8px 20px -4px rgba(28, 28, 28, 0.08) !important;
+}
+
+.ds-swatch-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(28, 28, 28, 0.18);
+  transition: border-color 0.25s ease-out, background-color 0.25s ease-out;
+  will-change: border-color;
+}
+
+.ds-palette-card:hover .ds-swatch-box,
+.ds-swatch-box:hover {
+  border-color: rgba(28, 28, 28, 0.4);
+}
+
+/* Expressive image zoom container */
+.m3-image-interactive img {
+  transition: transform 0.6s var(--m3-easing-standard);
+  will-change: transform;
+}
+
+.m3-image-interactive:hover img {
+  transform: scale(1.035);
+}
+
+/* Map Trim Path keyframe animation */
+@keyframes mapTrimPathAnim {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-map-trim-path {
+  stroke-dasharray: 1000;
+  animation: mapTrimPathAnim 5s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 24s linear infinite;
+}
+
+@keyframes pulseGlowRing {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.35); opacity: 0.2; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.animate-pulse-ring {
+  animation: pulseGlowRing 2.4s ease-in-out infinite;
+}
+
+/* Subtle floating mascot bobbing animation */
+@keyframes mascotFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-mascot-float-1 {
+  animation: mascotFloat 5s ease-in-out infinite;
+}
+.animate-mascot-float-2 {
+  animation: mascotFloat 5.6s ease-in-out 0.8s infinite;
+}
+.animate-mascot-float-3 {
+  animation: mascotFloat 6.2s ease-in-out 1.6s infinite;
+}
+
+/* Map Trim Path keyframe animation for 2480x3508 coordinates */
+@keyframes mapTrimPathAnim2500 {
+  0% {
+    stroke-dashoffset: 2500;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Comprehensive Unique Icon Micro-Animations System                          */
+/* -------------------------------------------------------------------------- */
+
+/* General base transition for all icons & SVGs - smooth reverse animation on mouse leave */
+img[alt*="Амулет"], img[alt*="Игла"], img[alt*="Карта"], img[alt*="Костёр"],
+img[alt*="Листок"], img[alt*="Лук"], img[alt*="Люлька"], img[alt*="Нож"],
+img[alt*="Рога"], img[alt*="Рыбы"], img[alt*="Следы"], img[alt*="Тарелка"],
+img[alt*="Чай"], img[alt*="Ягоды"],
+.lucide, svg[class*="lucide-"], .ethnic-icon-animated {
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius 0.38s ease;
+  will-change: transform;
+}
+
+/* 1. Амулет: Защитный оберег — 3D Y-поворот с защитной пульсацией */
+@keyframes animAmuletSwing {
+  0% { transform: rotate(0deg) scale(1) rotateY(0deg); }
+  30% { transform: rotate(-14deg) scale(1.15) rotateY(90deg); }
+  60% { transform: rotate(12deg) scale(1.18) rotateY(180deg); }
+  85% { transform: rotate(-6deg) scale(1.1); }
+  100% { transform: rotate(0deg) scale(1.12) rotateY(180deg); }
+}
+*:hover > img[alt*="Амулет"], img[alt*="Амулет"]:hover, .m3-card-interactive:hover img[alt*="Амулет"], .group:hover img[alt*="Амулет"], .card-spring-rounding:hover img[alt*="Амулет"] {
+  animation: animAmuletSwing 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 2. Игла с нитью: Поочерёдный наклон шитья стежками */
+@keyframes animNeedleSew {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-22deg) scale(1.18); }
+  50% { transform: rotate(15deg) scale(1.12); }
+  75% { transform: rotate(-8deg) scale(1.1); }
+  100% { transform: rotate(-4deg) scale(1.08); }
+}
+*:hover > img[alt*="Игла"], img[alt*="Игла"]:hover, .m3-card-interactive:hover img[alt*="Игла"], .group:hover img[alt*="Игла"], .card-spring-rounding:hover img[alt*="Игла"] {
+  animation: animNeedleSew 0.55s ease-in-out forwards;
+}
+
+/* 3. Карта: Разворачивание берестяного свитка карты */
+@keyframes animMapUnfold {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scaleX(1.22) scaleY(1.05) rotate(-6deg); }
+  70% { transform: scaleX(1.12) scaleY(1.02) rotate(4deg); }
+  100% { transform: scaleX(1.15) scaleY(1.04) rotate(0deg); }
+}
+*:hover > img[alt*="Карта"], img[alt*="Карта"]:hover, .m3-card-interactive:hover img[alt*="Карта"], .group:hover img[alt*="Карта"], .card-spring-rounding:hover img[alt*="Карта"] {
+  animation: animMapUnfold 0.6s ease-out forwards;
+}
+
+/* 4. Костёр: Огонь очага — живое пляшущее пламя */
+@keyframes animCampfireFlicker {
+  0%, 100% { transform: scaleY(1) scaleX(1) rotate(0deg); }
+  25% { transform: scaleY(1.22) scaleX(0.88) rotate(-6deg); }
+  50% { transform: scaleY(0.92) scaleX(1.12) rotate(6deg); }
+  75% { transform: scaleY(1.18) scaleX(0.92) rotate(-3deg); }
+}
+*:hover > img[alt*="Костёр"], img[alt*="Костёр"]:hover, .m3-card-interactive:hover img[alt*="Костёр"], .group:hover img[alt*="Костёр"], .card-spring-rounding:hover img[alt*="Костёр"] {
+  animation: animCampfireFlicker 0.6s ease-in-out forwards;
+}
+
+/* 5. Листок: Лесной листок — колыхание от ветра тайги */
+@keyframes animLeafSway {
+  0% { transform: rotate(0deg) scale(1); }
+  30% { transform: rotate(-18deg) scale(1.18); }
+  65% { transform: rotate(14deg) scale(1.12); }
+  100% { transform: rotate(-4deg) scale(1.1); }
+}
+*:hover > img[alt*="Листок"], img[alt*="Листок"]:hover, .m3-card-interactive:hover img[alt*="Листок"], .group:hover img[alt*="Листок"], .card-spring-rounding:hover img[alt*="Листок"] {
+  animation: animLeafSway 0.55s ease-in-out forwards;
+}
+
+/* 6. Лук: Охотничий лук — натяжение тетивы и отдача при выстреле */
+@keyframes animBowShoot {
+  0% { transform: scaleX(1) rotate(0deg); }
+  40% { transform: scaleX(0.82) scaleY(1.12) rotate(-8deg); }
+  65% { transform: scaleX(1.18) scaleY(0.92) rotate(5deg); }
+  100% { transform: scaleX(1.08) rotate(0deg); }
+}
+*:hover > img[alt*="Лук"], img[alt*="Лук"]:hover, .m3-card-interactive:hover img[alt*="Лук"], .group:hover img[alt*="Лук"], .card-spring-rounding:hover img[alt*="Лук"] {
+  animation: animBowShoot 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 7. Люлька: Берестяная люлька — убаюкивающее покачивание */
+@keyframes animCradleRock {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  30% { transform: rotate(-16deg) scale(1.12); }
+  70% { transform: rotate(16deg) scale(1.12); }
+}
+*:hover > img[alt*="Люлька"], img[alt*="Люлька"]:hover, .m3-card-interactive:hover img[alt*="Люлька"], .group:hover img[alt*="Люлька"], .card-spring-rounding:hover img[alt*="Люлька"] {
+  animation: animCradleRock 0.65s ease-in-out forwards;
+}
+
+/* 8. Нож: Охотничий нож — молниеносный взмах и резная насечка */
+@keyframes animKnifeCarve {
+  0% { transform: rotate(0deg) scale(1); }
+  30% { transform: rotate(-24deg) scale(1.18); }
+  65% { transform: rotate(12deg) scale(1.1); }
+  100% { transform: rotate(-6deg) scale(1.08); }
+}
+*:hover > img[alt*="Нож"], img[alt*="Нож"]:hover, .m3-card-interactive:hover img[alt*="Нож"], .group:hover img[alt*="Нож"], .card-spring-rounding:hover img[alt*="Нож"] {
+  animation: animKnifeCarve 0.5s ease-in-out forwards;
+}
+
+/* 9. Рога: Оленьи рога — величавый вскид и размах */
+@keyframes animHornsProud {
+  0% { transform: scale(1) rotate(0deg); }
+  40% { transform: scale(1.22) rotate(-10deg); }
+  70% { transform: scale(1.12) rotate(5deg); }
+  100% { transform: scale(1.15) rotate(0deg); }
+}
+*:hover > img[alt*="Рога"], img[alt*="Рога"]:hover, .m3-card-interactive:hover img[alt*="Рога"], .group:hover img[alt*="Рога"], .card-spring-rounding:hover img[alt*="Рога"] {
+  animation: animHornsProud 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 10. Рыбы: Рыбы — волнообразный взмах хвостом в речной струе */
+@keyframes animFishSwim {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(12deg) scaleY(0.92) scaleX(1.08); }
+  50% { transform: rotate(-8deg) scaleY(1.08) scaleX(0.95); }
+  75% { transform: rotate(8deg) scaleY(0.95) scaleX(1.05); }
+  100% { transform: rotate(0deg) scale(1.08); }
+}
+*:hover > img[alt*="Рыбы"], img[alt*="Рыбы"]:hover, .m3-card-interactive:hover img[alt*="Рыбы"], .group:hover img[alt*="Рыбы"], .card-spring-rounding:hover img[alt*="Рыбы"] {
+  animation: animFishSwim 0.65s ease-in-out forwards;
+}
+
+/* 11. Следы медведя: Следы хозяина тайги — глубокий упругий отпечаток лапы */
+@keyframes animBearFootprintStamp {
+  0% { transform: scale(1) rotate(0deg); }
+  30% { transform: scale(1.3) rotate(-8deg); }
+  60% { transform: scale(0.92) rotate(4deg); }
+  100% { transform: scale(1.12) rotate(0deg); }
+}
+*:hover > img[alt*="Следы"], img[alt*="Следы"]:hover, .m3-card-interactive:hover img[alt*="Следы"], .group:hover img[alt*="Следы"], .card-spring-rounding:hover img[alt*="Следы"] {
+  animation: animBearFootprintStamp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 12. Тарелка: Деревянная тарелка — подача блюда с плавным вращением */
+@keyframes animPlateServe {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.18); }
+  100% { transform: rotate(360deg) scale(1.12); }
+}
+*:hover > img[alt*="Тарелка"], img[alt*="Тарелка"]:hover, .m3-card-interactive:hover img[alt*="Тарелка"], .group:hover img[alt*="Тарелка"], .card-spring-rounding:hover img[alt*="Тарелка"] {
+  animation: animPlateServe 0.6s ease-in-out forwards;
+}
+
+/* 13. Чай: Кедровый чай — витающие клубы душистого пара */
+@keyframes animTeaSteam {
+  0% { transform: scale(1) rotate(0deg); }
+  33% { transform: scale(1.14) rotate(8deg); }
+  66% { transform: scale(1.22) rotate(-6deg); }
+  100% { transform: scale(1.15) rotate(3deg); }
+}
+*:hover > img[alt*="Чай"], img[alt*="Чай"]:hover, .m3-card-interactive:hover img[alt*="Чай"], .group:hover img[alt*="Чай"], .card-spring-rounding:hover img[alt*="Чай"] {
+  animation: animTeaSteam 0.65s ease-in-out forwards;
+}
+
+/* 14. Ягоды: Брусника и клюква — упругий сочный подскок */
+@keyframes animBerriesBounce {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scaleY(1.25) scaleX(0.85) rotate(-5deg); }
+  60% { transform: scaleY(0.88) scaleX(1.18) rotate(3deg); }
+  80% { transform: scaleY(1.08) scaleX(0.95) rotate(-1deg); }
+}
+*:hover > img[alt*="Ягоды"], img[alt*="Ягоды"]:hover, .m3-card-interactive:hover img[alt*="Ягоды"], .group:hover img[alt*="Ягоды"], .card-spring-rounding:hover img[alt*="Ягоды"] {
+  animation: animBerriesBounce 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Lucide & UI System Icons                                                   */
+/* -------------------------------------------------------------------------- */
+
+/* lucide-trees - Crown wind sway */
+@keyframes animTreesSway {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(-8deg) scale(1.08); }
+}
+.lucide-trees:hover, .group:hover .lucide-trees, button:hover .lucide-trees, a:hover .lucide-trees, .m3-card-interactive:hover .lucide-trees {
+  animation: animTreesSway 0.6s ease-in-out forwards;
+}
+
+/* lucide-hourglass - 180 deg flip */
+@keyframes animHourglassFlip {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
+}
+.lucide-hourglass:hover, .group:hover .lucide-hourglass, button:hover .lucide-hourglass, a:hover .lucide-hourglass, .m3-card-interactive:hover .lucide-hourglass {
+  animation: animHourglassFlip 0.5s ease-in-out forwards;
+}
+
+/* lucide-flame - Flame dance and flicker */
+@keyframes animFlameDance {
+  0%, 100% { transform: scale(1) translateY(0); opacity: 1; }
+  50% { transform: scale(1.18) translateY(-2px); opacity: 0.85; }
+}
+.lucide-flame:hover, .group:hover .lucide-flame, button:hover .lucide-flame, a:hover .lucide-flame, .m3-card-interactive:hover .lucide-flame {
+  animation: animFlameDance 0.5s ease-in-out forwards;
+}
+
+/* lucide-book, lucide-book-open - Page flutter and opening */
+@keyframes animBookFlutter {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.12) rotate(-6deg); }
+}
+.lucide-book:hover, .lucide-book-open:hover, .group:hover .lucide-book, .group:hover .lucide-book-open, button:hover .lucide-book, button:hover .lucide-book-open, a:hover .lucide-book, a:hover .lucide-book-open, .m3-card-interactive:hover .lucide-book, .m3-card-interactive:hover .lucide-book-open {
+  animation: animBookFlutter 0.5s ease-in-out forwards;
+}
+
+/* lucide-pen-tool - Pen tilt and calligraphic stroke */
+@keyframes animPenTilt {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(-15deg) translateY(-2px); }
+}
+.lucide-pen-tool:hover, .group:hover .lucide-pen-tool, button:hover .lucide-pen-tool, a:hover .lucide-pen-tool, .m3-card-interactive:hover .lucide-pen-tool {
+  animation: animPenTilt 0.45s ease-in-out forwards;
+}
+
+/* lucide-school - Arch bounce */
+@keyframes animSchoolBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.05); }
+}
+.lucide-school:hover, .group:hover .lucide-school, button:hover .lucide-school, a:hover .lucide-school, .m3-card-interactive:hover .lucide-school {
+  animation: animSchoolBounce 0.45s ease-in-out forwards;
+}
+
+/* lucide-map-pin - Pin jump and land */
+@keyframes animMapPinJump {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-7px) scale(1.1); }
+  70% { transform: translateY(-1px); }
+}
+.lucide-map-pin:hover, .group:hover .lucide-map-pin, button:hover .lucide-map-pin, a:hover .lucide-map-pin, .m3-card-interactive:hover .lucide-map-pin {
+  animation: animMapPinJump 0.5s ease-in-out forwards;
+}
+
+/* lucide-palette - Palette sway and rotation */
+@keyframes animPaletteTilt {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(15deg) scale(1.1); }
+}
+.lucide-palette:hover, .group:hover .lucide-palette, button:hover .lucide-palette, a:hover .lucide-palette, .m3-card-interactive:hover .lucide-palette {
+  animation: animPaletteTilt 0.5s ease-in-out forwards;
+}
+
+/* lucide-users - Silhouettes hop and scale */
+@keyframes animUsersHop {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.12) translateY(-3px); }
+}
+.lucide-users:hover, .group:hover .lucide-users, button:hover .lucide-users, a:hover .lucide-users, .m3-card-interactive:hover .lucide-users {
+  animation: animUsersHop 0.45s ease-in-out forwards;
+}
+
+/* lucide-quote - Quotation marks tilt */
+@keyframes animQuoteTilt {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(-12deg) scale(1.15); }
+}
+.lucide-quote:hover, .group:hover .lucide-quote, button:hover .lucide-quote, a:hover .lucide-quote, .m3-card-interactive:hover .lucide-quote {
+  animation: animQuoteTilt 0.45s ease-in-out forwards;
+}
+
+/* lucide-star - Rotating shimmer star */
+@keyframes animStarSpinGlow {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(90deg) scale(1.25); }
+  100% { transform: rotate(180deg) scale(1); }
+}
+.lucide-star:hover, .group:hover .lucide-star, button:hover .lucide-star, a:hover .lucide-star, .m3-card-interactive:hover .lucide-star {
+  animation: animStarSpinGlow 0.5s ease-in-out forwards;
+}
+
+/* lucide-award - Medal tilt and sheen */
+@keyframes animAwardShine {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(12deg) scale(1.12); }
+}
+.lucide-award:hover, .group:hover .lucide-award, button:hover .lucide-award, a:hover .lucide-award, .m3-card-interactive:hover .lucide-award {
+  animation: animAwardShine 0.5s ease-in-out forwards;
+}
+
+/* lucide-landmark - Columns pulse */
+@keyframes animLandmarkPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+.lucide-landmark:hover, .group:hover .lucide-landmark, button:hover .lucide-landmark, a:hover .lucide-landmark, .m3-card-interactive:hover .lucide-landmark {
+  animation: animLandmarkPulse 0.45s ease-in-out forwards;
+}
+
+/* lucide-graduation-cap - Academic cap tilt */
+@keyframes animCapTilt {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(-12deg) translateY(-2px); }
+}
+.lucide-graduation-cap:hover, .group:hover .lucide-graduation-cap, button:hover .lucide-graduation-cap, a:hover .lucide-graduation-cap, .m3-card-interactive:hover .lucide-graduation-cap {
+  animation: animCapTilt 0.45s ease-in-out forwards;
+}
+
+/* lucide-shield-check - Shield pop-up and scale */
+@keyframes animShieldPop {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.15) translateY(-3px); }
+}
+.lucide-shield-check:hover, .group:hover .lucide-shield-check, button:hover .lucide-shield-check, a:hover .lucide-shield-check, .m3-card-interactive:hover .lucide-shield-check {
+  animation: animShieldPop 0.45s ease-in-out forwards;
+}
+
+/* lucide-trending-up - Diagonal arrow movement */
+@keyframes animTrendingUpShift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(3px, -3px); }
+}
+.lucide-trending-up:hover, .group:hover .lucide-trending-up, button:hover .lucide-trending-up, a:hover .lucide-trending-up, .m3-card-interactive:hover .lucide-trending-up {
+  animation: animTrendingUpShift 0.45s ease-in-out forwards;
+}
+
+/* lucide-languages - 3D Y-axis flip */
+@keyframes animLanguagesFlip {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(180deg); }
+}
+.lucide-languages:hover, .group:hover .lucide-languages, button:hover .lucide-languages, a:hover .lucide-languages, .m3-card-interactive:hover .lucide-languages {
+  animation: animLanguagesFlip 0.5s ease-in-out forwards;
+}
+
+/* lucide-search - Magnifier glide and sway */
+@keyframes animSearchGlide {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(2px, -2px) rotate(10deg); }
+}
+.lucide-search:hover, .group:hover .lucide-search, button:hover .lucide-search, a:hover .lucide-search, .m3-card-interactive:hover .lucide-search {
+  animation: animSearchGlide 0.45s ease-in-out forwards;
+}
+
+/* lucide-qr-code - Frame pulse */
+@keyframes animQrPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.lucide-qr-code:hover, .group:hover .lucide-qr-code, button:hover .lucide-qr-code, a:hover .lucide-qr-code, .m3-card-interactive:hover .lucide-qr-code {
+  animation: animQrPulse 0.45s ease-in-out forwards;
+}
+
+/* lucide-copy - Duplicate page shift */
+@keyframes animCopyShift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(3px, -3px); }
+}
+.lucide-copy:hover, .group:hover .lucide-copy, button:hover .lucide-copy, a:hover .lucide-copy, .m3-card-interactive:hover .lucide-copy {
+  animation: animCopyShift 0.4s ease-in-out forwards;
+}
+
+/* lucide-check, check-circle-2 - Springy checkmark bounce */
+@keyframes animCheckBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+.lucide-check:hover, .lucide-check-circle-2:hover, .group:hover .lucide-check, .group:hover .lucide-check-circle-2, button:hover .lucide-check, a:hover .lucide-check {
+  animation: animCheckBounce 0.4s ease-in-out forwards;
+}
+
+/* lucide-sparkles - Flash and rotation */
+@keyframes animSparklesFlash {
+  0%, 100% { transform: rotate(0deg) scale(1); opacity: 1; }
+  50% { transform: rotate(45deg) scale(1.25); opacity: 0.75; }
+}
+.lucide-sparkles:hover, .group:hover .lucide-sparkles, button:hover .lucide-sparkles, a:hover .lucide-sparkles, .m3-card-interactive:hover .lucide-sparkles {
+  animation: animSparklesFlash 0.5s ease-in-out forwards;
+}
+
+/* lucide-maximize2 - Corner bracket expansion */
+@keyframes animMaximizeExpand {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+.lucide-maximize2:hover, .group:hover .lucide-maximize2, button:hover .lucide-maximize2, a:hover .lucide-maximize2, .m3-card-interactive:hover .lucide-maximize2 {
+  animation: animMaximizeExpand 0.45s ease-in-out forwards;
+}
+
+/* lucide-compass - Compass needle rotation */
+@keyframes animCompassRotate {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.lucide-compass:hover, .group:hover .lucide-compass, button:hover .lucide-compass, a:hover .lucide-compass {
+  animation: animCompassRotate 0.65s ease-in-out forwards;
+}
+
+/* lucide-volume-2, lucide-volume-x - Sound wave pulse */
+@keyframes animVolumePulse {
+  0%, 100% { transform: scale(1) translateX(0); }
+  35% { transform: scaleX(1.25) scaleY(1.1) translateX(2px); }
+  70% { transform: scaleX(0.9) scaleY(0.95) translateX(-1px); }
+}
+.lucide-volume-2:hover, .lucide-volume-x:hover, .group:hover .lucide-volume-2, button:hover .lucide-volume-2, a:hover .lucide-volume-2 {
+  animation: animVolumePulse 0.5s ease-in-out forwards;
+}
+
+/* lucide-bookmark, lucide-tag - Ribbon clip drop */
+@keyframes animBookmarkDrop {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scaleY(1.18); }
+}
+.lucide-bookmark:hover, .lucide-tag:hover, .group:hover .lucide-bookmark, button:hover .lucide-bookmark, a:hover .lucide-bookmark {
+  animation: animBookmarkDrop 0.45s ease-in-out forwards;
+}
+
+/* lucide-sliders, lucide-sliders-horizontal - Adjuster slider shift */
+@keyframes animSlidersShift {
+  0%, 100% { transform: translateX(0); }
+  30% { transform: translateX(-3px) scale(1.1); }
+  70% { transform: translateX(3px) scale(1.1); }
+}
+.lucide-sliders:hover, .lucide-sliders-horizontal:hover, .group:hover .lucide-sliders, button:hover .lucide-sliders {
+  animation: animSlidersShift 0.5s ease-in-out forwards;
+}
+
+/* lucide-folder-archive, lucide-folder - Archive drawer pull */
+@keyframes animFolderOpen {
+  0%, 100% { transform: translateY(0) rotateX(0deg); }
+  50% { transform: translateY(-3px) scale(1.12); }
+}
+.lucide-folder-archive:hover, .lucide-folder:hover, .group:hover .lucide-folder-archive, button:hover .lucide-folder-archive {
+  animation: animFolderOpen 0.45s ease-in-out forwards;
+}
+
+/* lucide-layers - Layer stack expansion */
+@keyframes animLayersExpand {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.18) translateY(-2px); }
+}
+.lucide-layers:hover, .group:hover .lucide-layers, button:hover .lucide-layers, a:hover .lucide-layers {
+  animation: animLayersExpand 0.45s ease-in-out forwards;
+}
+
+/* lucide-heart - Heartbeat pulse */
+@keyframes animHeartBeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.3) rotate(-6deg); }
+  50% { transform: scale(1.05) rotate(4deg); }
+  75% { transform: scale(1.2) rotate(-2deg); }
+}
+.lucide-heart:hover, .group:hover .lucide-heart, button:hover .lucide-heart, a:hover .lucide-heart {
+  animation: animHeartBeat 0.55s ease-in-out forwards;
+}
+
+/* lucide-send, lucide-share-2 - Paper plane takeoff flight */
+@keyframes animSendFly {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4px, -4px) scale(1.15) rotate(-10deg); }
+}
+.lucide-send:hover, .lucide-share-2:hover, .group:hover .lucide-send, button:hover .lucide-send, a:hover .lucide-send {
+  animation: animSendFly 0.45s ease-in-out forwards;
+}
+
+/* lucide-play, lucide-pause - Media play nudge */
+@keyframes animPlayNudge {
+  0%, 100% { transform: translateX(0) scale(1); }
+  50% { transform: translateX(4px) scale(1.15); }
+}
+.lucide-play:hover, .lucide-pause:hover, .group:hover .lucide-play, button:hover .lucide-play, a:hover .lucide-play {
+  animation: animPlayNudge 0.4s ease-in-out forwards;
+}
+
+/* lucide-info, lucide-help-circle - Info query tilt */
+@keyframes animInfoTilt {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(14deg) scale(1.18); }
+}
+.lucide-info:hover, .lucide-help-circle:hover, .group:hover .lucide-info, button:hover .lucide-info, a:hover .lucide-info {
+  animation: animInfoTilt 0.45s ease-in-out forwards;
+}
+
+/* Directional Chevrons & Arrows */
+@keyframes animChevronRight { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+@keyframes animChevronLeft { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-4px); } }
+@keyframes animArrowDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@keyframes animArrowUp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+.lucide-chevron-right:hover, .group:hover .lucide-chevron-right, button:hover .lucide-chevron-right, a:hover .lucide-chevron-right { animation: animChevronRight 0.4s ease-in-out forwards; }
+.lucide-chevron-left:hover, .group:hover .lucide-chevron-left, button:hover .lucide-chevron-left, a:hover .lucide-chevron-left { animation: animChevronLeft 0.4s ease-in-out forwards; }
+.lucide-arrow-down:hover, .group:hover .lucide-arrow-down, button:hover .lucide-arrow-down, a:hover .lucide-arrow-down { animation: animArrowDown 0.4s ease-in-out forwards; }
+.lucide-arrow-up:hover, .group:hover .lucide-arrow-up, button:hover .lucide-arrow-up, a:hover .lucide-arrow-up { animation: animArrowUp 0.4s ease-in-out forwards; }
+
+/* lucide-grid - Grid cells bounce */
+@keyframes animGridBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.lucide-grid:hover, .group:hover .lucide-grid, button:hover .lucide-grid, a:hover .lucide-grid {
+  animation: animGridBounce 0.45s ease-in-out forwards;
+}
+
+/* lucide-type - Symbol hop */
+@keyframes animTypeBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.lucide-type:hover, .group:hover .lucide-type, button:hover .lucide-type, a:hover .lucide-type {
+  animation: animTypeBounce 0.4s ease-in-out forwards;
+}
+
+/* lucide-feather - Feather flutter */
+@keyframes animFeatherFlutter {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(-14deg) translateY(-2px); }
+}
+.lucide-feather:hover, .group:hover .lucide-feather, button:hover .lucide-feather, a:hover .lucide-feather {
+  animation: animFeatherFlutter 0.45s ease-in-out forwards;
+}
+
+/* lucide-x - 90 deg rotation */
+@keyframes animXRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(90deg); }
+}
+.lucide-x:hover, button:hover .lucide-x {
+  animation: animXRotate 0.35s ease-in-out forwards;
+}
+
+/* lucide-eye - Eye focus squeeze */
+@keyframes animEyeFocus {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15) scaleY(0.85); }
+}
+.lucide-eye:hover, .group:hover .lucide-eye, button:hover .lucide-eye, a:hover .lucide-eye {
+  animation: animEyeFocus 0.45s ease-in-out forwards;
+}
+
+
+/* Base transition for smooth reverse animation when mouse leaves hover state */
+.icon-bark-texture, .icon-pyrograph, .icon-flat-book, .icon-lesson-reading,
+.icon-velvet-paper, .icon-eyedropper-cmyk, .icon-horse-head, .icon-grouse,
+.icon-book-format, .icon-readers-users, .icon-peoples-chum {
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+/* 1. Плотная кора: Мягкое упругое сгибание и рельефный всплеск бересты */
+@keyframes animBarkTexture {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(1.3) rotate(-14deg) scaleX(1.1); }
+  70% { transform: scale(1.15) rotate(6deg); }
+  100% { transform: scale(1.2) rotate(0deg); }
+}
+.group:hover .icon-bark-texture,
+.m3-card-interactive:hover .icon-bark-texture,
+.icon-bark-texture:hover,
+*:hover > img[alt*="Плотная кора"] {
+  animation: animBarkTexture 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 2. Таёжный пирограф: Упругий прижим пера выжигателя с поворотом накала */
+@keyframes animPyrographBurn {
+  0% { transform: scale(1) rotate(0deg); }
+  30% { transform: scale(1.32) rotate(-20deg); }
+  65% { transform: scale(1.18) rotate(12deg); }
+  100% { transform: scale(1.22) rotate(-4deg); }
+}
+.group:hover .icon-pyrograph,
+.m3-card-interactive:hover .icon-pyrograph,
+.icon-pyrograph:hover {
+  animation: animPyrographBurn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 3. Раскрытие на 180°: Раскрытие книги плоским разворотом */
+@keyframes animFlatBookUnfold {
+  0% { transform: scale(1) scaleX(1); }
+  40% { transform: scaleX(1.35) scaleY(0.9) rotate(0deg); }
+  75% { transform: scaleX(1.18) scaleY(1.06); }
+  100% { transform: scale(1.2); }
+}
+.group:hover .icon-flat-book,
+.m3-card-interactive:hover .icon-flat-book,
+.icon-flat-book:hover {
+  animation: animFlatBookUnfold 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 4. Уроки и личное чтение: Разворот страниц с пружинящим подскоком */
+@keyframes animLessonReading {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(1.3) rotate(-12deg); }
+  70% { transform: scale(1.16) rotate(6deg); }
+  100% { transform: scale(1.2) rotate(0deg); }
+}
+.group:hover .icon-lesson-reading,
+.m3-card-interactive:hover .icon-lesson-reading,
+.icon-lesson-reading:hover {
+  animation: animLessonReading 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 5. Бархатистый офсет: Скольжение ворсистого пласта матовой бумаги */
+@keyframes animVelvetSlide {
+  0% { transform: scale(1) rotate(0deg); }
+  40% { transform: scale(1.25) rotate(-8deg) scaleX(1.1); }
+  80% { transform: scale(1.16) rotate(3deg); }
+  100% { transform: scale(1.2) rotate(0deg); }
+}
+.group:hover .icon-velvet-paper,
+.m3-card-interactive:hover .icon-velvet-paper,
+.icon-velvet-paper:hover {
+  animation: animVelvetSlide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 6. Печать в CMYK: Забор цвета и поворот пипетки */
+@keyframes animEyedropperCmyk {
+  0% { transform: scale(1) rotate(0deg); }
+  30% { transform: scale(1.3) rotate(-25deg); }
+  65% { transform: scale(1.18) rotate(10deg); }
+  100% { transform: scale(1.22) rotate(-8deg); }
+}
+.group:hover .icon-eyedropper-cmyk,
+.m3-card-interactive:hover .icon-eyedropper-cmyk,
+.icon-eyedropper-cmyk:hover {
+  animation: animEyedropperCmyk 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 7. Областной уровень: Гербовый щит с коронной звездой */
+@keyframes animHorseShieldPrance {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(1.15) rotate(-8deg); }
+  70% { transform: scale(1.08) rotate(4deg); }
+  100% { transform: scale(1.1) rotate(0deg); }
+}
+.group\/grant:hover .icon-horse-shield,
+.inner-card-interactive:hover .icon-horse-shield,
+.icon-horse-shield:hover,
+.group\/grant:hover .icon-horse-head,
+.inner-card-interactive:hover .icon-horse-head {
+  animation: animHorseShieldPrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 8. Районный уровень: Круглая плашка-медаль с таёжной елью */
+@keyframes animGrouseMedalFan {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(1.15) rotate(8deg); }
+  70% { transform: scale(1.08) rotate(-4deg); }
+  100% { transform: scale(1.1) rotate(0deg); }
+}
+.group\/grant:hover .icon-grouse-medal,
+.inner-card-interactive:hover .icon-grouse-medal,
+.icon-grouse-medal:hover,
+.group\/grant:hover .icon-grouse,
+.inner-card-interactive:hover .icon-grouse {
+  animation: animGrouseMedalFan 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 9. Формат книги: Разворот книжного переплёта */
+@keyframes animBookFormatFlip {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(1.28) rotate(-14deg); }
+  70% { transform: scale(1.15) rotate(5deg); }
+  100% { transform: scale(1.2) rotate(0deg); }
+}
+.group:hover .icon-book-format,
+.icon-book-format:hover {
+  animation: animBookFormatFlip 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 10. Читатели: Упругий подскок и масштабирование силуэтов */
+.group:hover .icon-readers-users,
+.icon-readers-users:hover {
+  animation: animUsersHop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 11. Народы Верхнекетья: Всплеск купола чума */
+@keyframes animPeoplesGather {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(1.3) rotate(-12deg); }
+  70% { transform: scale(1.16) rotate(6deg); }
+  100% { transform: scale(1.22) rotate(0deg); }
+}
+.group:hover .icon-peoples-chum,
+.icon-peoples-chum:hover {
+  animation: animPeoplesGather 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 12. Отступы под кольца: Упругое расхождение колец переплёта без прозрачности */
+@keyframes animRingsPulse {
+  0% { transform: scale(1) rotate(0deg); }
+  40% { transform: scale(1.32) rotate(-12deg); }
+  75% { transform: scale(1.15) rotate(6deg); }
+  100% { transform: scale(1.18) rotate(0deg); }
+}
+.group:hover .animate-rings-pulse,
+.m3-card-interactive:hover .animate-rings-pulse,
+.m3-card-interactive:hover .lucide-grid {
+  animation: animRingsPulse 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 13. Баланс иллюстраций: Трёхмерное качание баланса колонок без смещения оси X/Y */
+@keyframes animBalanceShift {
+  0% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(1.25) rotate(14deg); }
+  70% { transform: scale(1.12) rotate(-8deg); }
+  100% { transform: scale(1.16) rotate(0deg); }
+}
+.group:hover .animate-balance-shift,
+.m3-card-interactive:hover .animate-balance-shift,
+.m3-card-interactive:hover .lucide-columns {
+  animation: animBalanceShift 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Dedicated Explicit Hover Animation Classes */
+@keyframes animChumBounceGlow {
+  0% { transform: scale(1) rotate(0deg); }
+  40% { transform: scale(1.3) rotate(-6deg); }
+  70% { transform: scale(1.18) rotate(4deg); }
+  100% { transform: scale(1.2) rotate(0deg); }
+}
+
+.chum-icon-animated:hover,
+.group\/chum:hover .chum-icon-animated {
+  animation: animChumBounceGlow 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+@keyframes logoGlintDiagonal {
+  0% {
+    transform: translateX(-150%) translateY(-150%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(150%) translateY(150%) rotate(25deg);
+  }
+}
+
+.logo-glint-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-glint-hover::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(
+    135deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 55%
+  );
+  transform: translateX(-150%) translateY(-150%) rotate(25deg);
+  pointer-events: none;
+}
+
+.logo-glint-hover:hover::after {
+  animation: logoGlintDiagonal 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-pen-forward { animation: animPenTilt 0.45s ease-in-out forwards; }
+.animate-pen-reverse { animation: animPenTilt 0.45s ease-in-out reverse forwards; }
+
+.animate-school-forward { animation: animSchoolBounce 0.45s ease-in-out forwards; }
+.animate-school-reverse { animation: animSchoolBounce 0.45s ease-in-out reverse forwards; }
+
+.animate-mappin-forward { animation: animMapPinJump 0.5s ease-in-out forwards; }
+.animate-mappin-reverse { animation: animMapPinJump 0.5s ease-in-out reverse forwards; }
+
+.animate-palette-forward { animation: animPaletteTilt 0.5s ease-in-out forwards; }
+.animate-palette-reverse { animation: animPaletteTilt 0.5s ease-in-out reverse forwards; }
+
+/* Mobile scale adaptation for book canvas & interactive reader (< 768px) */
+@media (max-width: 767px) {
+  .hero-book-canvas-mobile-scale {
+    transform: none;
+    transform-origin: center center;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-book-canvas-mobile-scale {
+    transform: none;
+    transform-origin: center center;
+  }
+}

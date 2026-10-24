@@ -1,0 +1,14 @@
+const fs = require('fs');
+console.log("Answers based on current max-width: 639px CSS:");
+console.log("1. Header top: 8px, padding-top: 16px -> 24px (Visual space 24px from top to white pill)");
+console.log("2. Header height: 48px");
+console.log("3. Font sizes:");
+console.log("   Name: 40px, line-height 1.05");
+console.log("   Role: 16px, line-height 1.3");
+console.log("   Desc: 15px, line-height 1.35");
+console.log("4. Spacing:");
+console.log("   Name to Role: 2px (or 4px from .hero__titles gap)");
+console.log("   Role to Desc: 8px gap + 8px margin-bottom = 16px");
+console.log("5. Buttons:");
+console.log("   Padding: 0 16px");
+console.log("   Font size: 15px");

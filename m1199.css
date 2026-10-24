@@ -1,0 +1,695 @@
+
+  .header {
+    top: 8px;
+    padding: 0 40px;
+  }
+
+  .header--sticky,
+  .header--hiding {
+    top: 8px;
+    padding: 0 40px;
+  }
+
+  .header__container {
+    max-width: 100%;
+    height: 48px;
+    padding: 0 8px;
+  }
+
+  .header__logo img {
+    height: 28px;
+  }
+
+  .social-links {
+    display: none;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__actions .btn-resume {
+    display: inline-flex;
+    height: 36px;
+    padding: 0 24px;
+    font-size: 14px;
+    border-radius: var(--radius-btn-md, 8px);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .burger-btn {
+    display: flex;
+  }
+
+  .footer__tablet-nav {
+    display: inline-flex;
+  }
+
+  .menu-modal {
+    width: 480px;
+    padding: 24px;
+  }
+
+  .hero__container {
+    width: 980px;
+    height: 695px;
+  }
+
+  .hero__content {
+    left: 40px;
+    top: 194px;
+    width: auto;
+    gap: 20px;
+  }
+
+  .hero__text-group {
+    gap: 12px;
+  }
+
+  .hero__titles {
+    gap: 2px;
+  }
+
+  .hero__name {
+    font-size: 56px;
+    line-height: 1.1;
+    letter-spacing: 0.56px;
+  }
+
+  .hero__role {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .hero__description {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .hero__buttons {
+    gap: 20px;
+  }
+
+  .btn {
+    padding: 12px 16px;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .hero__photo {
+    left: 375px;
+    top: 225px;
+    width: 850px;
+    height: 470px;
+  }
+
+  .hero__line--m {
+    left: 346.24px;
+    top: 185.16px;
+    width: 313.91px;
+    height: 207.2px;
+  }
+
+  .hero__line--b {
+    left: 532px;
+    top: 196.58px;
+    width: 401.81px;
+    height: 377.98px;
+  }
+
+  .about {
+    padding: 96px 0;
+  }
+
+  .about__container {
+    padding: 0 40px;
+    gap: 20px;
+  }
+
+  .about__header {
+    gap: 12px;
+  }
+
+  .about__title {
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: 0.42px;
+  }
+
+  .about__line {
+    width: 590px;
+    height: 99px;
+    bottom: 9px;
+    left: calc(100% - 3px);
+  }
+
+  .about__subtitles {
+    gap: 12px;
+  }
+
+  .about__lead {
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: 0.24px;
+  }
+
+  .about__method {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .about__content {
+    gap: 20px;
+  }
+
+  .about__cards {
+    gap: 20px;
+  }
+
+  .about-card {
+    aspect-ratio: 210 / 318;
+  }
+
+  .about__text {
+    gap: 20px;
+  }
+
+  .about__desc {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .about__experience {
+    gap: 8px;
+  }
+
+  .about__exp-title {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .about__exp-list {
+    gap: 8px;
+  }
+
+  .projects {
+    padding: 96px 0;
+  }
+
+  .projects__container {
+    padding: 0 40px;
+    gap: 32px;
+  }
+
+  .projects__title {
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: 0.42px;
+  }
+
+  .projects__line {
+    left: calc(100% - 2px);
+    bottom: 4px;
+    width: 520px;
+    height: 114px;
+  }
+
+  .projects__grid {
+    gap: 20px;
+    width: 100%;
+  }
+
+  .projects__row {
+    gap: 20px;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .project-card-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    padding: 32px;
+    gap: 16px;
+  }
+
+  .project-card.is-expanded {
+    height: 520px;
+  }
+
+  .project-card::after {
+    border-width: 2px;
+  }
+
+  .projects__row--top .project-card-wrapper--tutor {
+    flex: 548 1 0%;
+    min-width: 0;
+  }
+
+  .projects__row--top .project-card-wrapper--iniciativa {
+    flex: 332 1 0%;
+    min-width: 0;
+  }
+
+  .projects__row--bottom .project-card-wrapper--law-com {
+    flex: 1 1 0%;
+    min-width: 0;
+  }
+
+  .projects__row--bottom .project-card-wrapper--law-day {
+    flex: 1 1 0%;
+    min-width: 0;
+  }
+
+  .project-card__content {
+    gap: 20px;
+  }
+
+  .project-card__title {
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: 0.24px;
+  }
+
+  .project-card--tutor .project-card__title {
+    max-width: 370px;
+  }
+
+  .project-card__tags {
+    gap: 12px;
+  }
+
+  .project-card__tag {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .card-elem--tutor-mascot {
+    right: 30px;
+    height: 230px;
+  }
+
+  .card-elem--tutor-puzzle {
+    left: 62px;
+    bottom: -10px;
+    width: 340px;
+  }
+
+  .card-elem--tutor-logo {
+    left: 32px;
+    bottom: 32px;
+    width: 37px;
+    height: 48px;
+  }
+
+  .card-elem--iniciativa-dogs {
+    height: 220px;
+  }
+
+  .card-elem--iniciativa-stickers {
+    left: 27px;
+    top: 260px;
+    width: 64px;
+  }
+
+  .card-elem--law-com-girl {
+    right: 20px;
+    height: 270px;
+  }
+
+  .card-elem--law-com-lines {
+    width: 210px;
+  }
+
+  .card-elem--law-day-balloon {
+    height: 250px;
+  }
+
+  .card-elem--law-day-gift {
+    left: 150px;
+    bottom: 25px;
+    width: 100px;
+  }
+
+  /* Секция «Компетенции и стек» на 980px */
+  .skills {
+    padding: 96px 0;
+  }
+
+  .skills__container {
+    padding: 0 40px;
+    gap: 48px;
+  }
+
+  .skills__header {
+    gap: 12px;
+  }
+
+  .skills__title {
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: 0.42px;
+  }
+
+  .skills__line {
+    left: calc(100% - 3px);
+    top: -37px;
+    width: 620px;
+    height: 131px;
+  }
+
+  .skills__lead {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .skills__content {
+    gap: 20px;
+  }
+
+  .skills-card-software {
+    flex: 1 1 0;
+    width: auto;
+    padding: 32px;
+    border-radius: var(--radius-card, 14px);
+    gap: 20px;
+    order: 1;
+  }
+
+  .skills-card-software::after {
+    border-width: 1px;
+    border-radius: inherit;
+  }
+
+  .skills-card-software__title {
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: 0.24px;
+  }
+
+  .software-list {
+    gap: 20px;
+  }
+
+  .software-item {
+    gap: 12px;
+  }
+
+  .software-item__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+  }
+
+  .software-item__content {
+    gap: 4px;
+  }
+
+  .software-item__title {
+    font-size: 18px;
+    line-height: 1.4;
+    min-height: 28px;
+  }
+
+  .software-item__desc {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .skills__text-blocks {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    gap: 40px;
+    order: 2;
+  }
+
+  .skills-group {
+    gap: 20px;
+  }
+
+  .skills-group--skills {
+    order: 1;
+  }
+
+  .skills-group--content {
+    order: 2;
+  }
+
+  .skills-group__title {
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: 0.24px;
+  }
+
+  .skills-group__list {
+    gap: 20px;
+  }
+
+  .skills-item {
+    gap: 8px;
+  }
+
+  .skills-item__title {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .skills-item__desc {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* --- Секция «Алгоритм взаимодействия» (980px) --- */
+  .algorithm {
+    padding: 96px 0;
+  }
+
+  .algorithm__container {
+    padding: 0 40px;
+    gap: 32px;
+  }
+
+  .algorithm__header {
+    gap: 12px;
+  }
+
+  .algorithm__title {
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: 0.42px;
+  }
+
+  .algorithm__line {
+    left: calc(100% - 5px);
+    top: -62px;
+    width: 580px;
+    height: 104px;
+  }
+
+  .algorithm__lead {
+    font-size: 18px;
+    line-height: 1.4;
+    max-width: 555px;
+  }
+
+  .algorithm__content {
+    gap: 20px;
+  }
+
+  .algorithm__steps {
+    width: 555px;
+    gap: 32px;
+  }
+
+  .algorithm-card {
+    min-height: 320px;
+    padding: 32px;
+    gap: 12px;
+  }
+
+  .algorithm-card__header {
+    gap: 8px;
+  }
+
+  .algorithm-card__number {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .algorithm-card__title {
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: 0.24px;
+  }
+
+  .algorithm-card__text {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .algorithm__photo-wrap {
+    top: 80px;
+    width: clamp(320px, 35vw, 474px);
+    height: 712px;
+  }
+
+  /* --- Секция «Вопросы и ответы» (FAQ) (980px) --- */
+  .faq {
+    padding: 80px 0 48px 0;
+  }
+
+  .faq__container {
+    padding: 0 40px;
+    gap: 40px;
+  }
+
+  .faq__title {
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: 0.42px;
+  }
+
+  .faq__line {
+    left: calc(100% - 5px);
+    top: -62px;
+    width: 580px;
+    height: 104px;
+  }
+
+  .faq__lead {
+    font-size: 18px;
+    line-height: 1.4;
+    max-width: 600px;
+  }
+
+  /* --- Секция «Контакты» (980px) --- */
+  .contacts {
+    padding: 96px 0;
+  }
+
+  .contacts__container {
+    padding: 0 40px;
+    gap: 48px;
+  }
+
+  .contacts__header {
+    gap: 12px;
+  }
+
+  .contacts__title {
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: 0.42px;
+  }
+
+  .contacts__line {
+    width: 620px;
+    height: 110px;
+    top: -75px;
+  }
+
+  .contacts__lead {
+    font-size: 18px;
+    line-height: 1.4;
+    max-width: 680px;
+  }
+
+  .contacts__content {
+    gap: 24px;
+  }
+
+  .contacts__direct {
+    gap: 20px;
+  }
+
+  .contacts__subtitle {
+    font-size: 30px;
+    line-height: 39px;
+  }
+
+  .contacts__details {
+    gap: 24px;
+  }
+
+  .contacts__detail-item {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .contacts__socials-title {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .contacts__socials-list {
+    gap: 20px;
+  }
+
+  .contacts-form {
+    padding: 32px;
+    gap: 16px;
+  }
+
+  .contacts-form__input,
+  .contacts-form__textarea {
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 16px 20px;
+  }
+
+  /* --- Секция «Подвал» (980px) --- */
+  .footer {
+    padding: 64px 0 32px 0;
+  }
+
+  .footer__container {
+    padding: 0 40px;
+  }
+
+  .footer__top {
+    grid-template-columns: 2fr 1fr 1.3fr 1.3fr;
+    gap: 32px;
+  }
+
+  .footer__desc {
+    font-size: 16px;
+    line-height: 1.4;
+    max-width: 320px;
+  }
+
+  .footer__col-title {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 16px;
+  }
+
+  .footer__nav-link {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .footer__contact-item {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .footer__divider {
+    margin: 40px 0 24px 0;
+  }
+
+  .footer__copyright {
+    font-size: 14px;
+  }
+
+  .footer__disclaimer {
+    font-size: 12px;
+    max-width: 440px;
+  }

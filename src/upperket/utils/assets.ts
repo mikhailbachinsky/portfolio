@@ -1,0 +1,46 @@
+export const ASSETS = {
+  cardTemplates: {
+    dark: '/card_template_dark.svg',
+    light: '/card_template_light.svg',
+    darkPng: '/card_template_dark.png',
+    lightPng: '/card_template_light.png',
+  },
+  ornamentTemplates: {
+    dark: '/ornament_template_dark.svg',
+    light: '/ornament_template_light.svg',
+    darkPng: '/ornament_template_dark.png',
+    lightPng: '/ornament_template_light.png',
+  },
+  recipeTemplate: '/recipe_page_template.svg',
+  recipeTemplatePng: '/recipe_page_template.png',
+  map: '/icons/Карта.svg',
+  mapPng: '/icons/Карта.png',
+  challenges: {
+    academic: '/challenge_academic.webp',
+    linguistics: '/challenge_linguistics.webp',
+    linguisticCrop: '/challenge_linguistic_crop.webp',
+    multilingualBarrier: '/challenge_multilingual_barrier.webp',
+    multilingual: '/challenge_multilingual.webp',
+    photobank: '/challenge_photobank.webp',
+    reconstruction: '/challenge_reconstruction.webp',
+  },
+  museumPhotos: [
+    { src: '/museum-photos/museum_boat_model.webp', alt: 'Макет лодки-обласка в мини-музее «Затёски»' },
+    { src: '/museum-photos/museum_chum_model.webp', alt: 'Экспозиция чума в мини-музее «Затёски»' },
+    { src: '/museum-photos/museum_birch_model.webp', alt: 'Берестяная утварь в музее' },
+  ],
+  schmutztitel: [
+    { id: 1, file: '/sections/family.svg', fallback: '/p_1.webp', name: 'Семья' },
+    { id: 2, file: '/sections/clothing.svg', fallback: '/p_2.webp', name: 'Одежда' },
+    { id: 3, file: '/sections/dwelling.svg', fallback: '/p_3.webp', name: 'Жилище' },
+    { id: 4, file: '/sections/geography.svg', fallback: '/p_4.webp', name: 'География' },
+    { id: 5, file: '/sections/flora.svg', fallback: '/p_5.webp', name: 'Флора' },
+    { id: 6, file: '/sections/fauna.svg', fallback: '/p_6.webp', name: 'Фауна' },
+    { id: 7, file: '/sections/tools.svg', fallback: '/p_7.webp', name: 'Инструменты и материалы' },
+    { id: 8, file: '/sections/reindeer.svg', fallback: '/p_8.webp', name: 'Оленеводство' },
+    { id: 9, file: '/sections/hunting.svg', fallback: '/p_9.webp', name: 'Охота' },
+    { id: 10, file: '/sections/fishing.svg', fallback: '/p_10.webp', name: 'Рыболовство' },
+    { id: 11, file: '/sections/dishes.svg', fallback: '/p_11.webp', name: 'Традиционные блюда' },
+    { id: 12, file: '/sections/spiritual.svg', fallback: '/p_12.webp', name: 'Духовная культура' },
+  ]
+};

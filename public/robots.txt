@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Host and Sitemap
+Host: https://ais-pre-dvwexfcvw3slnm4mj7ebpm-594536071210.europe-west2.run.app
+Sitemap: https://ais-pre-dvwexfcvw3slnm4mj7ebpm-594536071210.europe-west2.run.app/sitemap.xml

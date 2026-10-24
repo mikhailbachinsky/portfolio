@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://ais-pre-dvwexfcvw3slnm4mj7ebpm-594536071210.europe-west2.run.app/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ais-pre-dvwexfcvw3slnm4mj7ebpm-594536071210.europe-west2.run.app/assets/digital-presentation.webp</image:loc>
+      <image:title>Тьюторская служба ТГУ — Дизайн-кейс визуальной системы и брендбука</image:title>
+      <image:caption>Дизайн-кейс айдентики Тьюторской службы ТГУ от Михаила Бачинского</image:caption>
+      <image:geo_location>Томск, Россия</image:geo_location>
+    </image:image>
+  </url>
+</urlset>

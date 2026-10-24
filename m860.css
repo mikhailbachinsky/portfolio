@@ -1,0 +1,24 @@
+
+  .project-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-stage {
+    padding: 24px;
+    min-height: 320px;
+  }
+  .project-stage__canvas {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .project-modal__hint {
+    display: none;
+  }
+  .project-modal__header {
+    padding: 16px 20px;
+  }
+  .project-modal__body {
+    padding: 20px;
+  }
+  .project-modal__footer {
+    padding: 16px 20px;
+  }

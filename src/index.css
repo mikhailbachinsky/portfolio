@@ -1,0 +1,849 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Geologica', sans-serif;
+  --font-mono: 'Geologica', sans-serif;
+}
+
+html,
+body,
+*,
+*::before,
+*::after,
+button,
+input,
+select,
+textarea,
+code,
+pre,
+kbd {
+  font-family: 'Geologica', sans-serif !important;
+}
+
+/* Headings default to SemiBold (600) with balanced line wrap */
+h1, h2, h3 {
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+h4, h5, h6 {
+  font-weight: 600;
+  text-wrap: pretty;
+}
+
+/* Body & small text default to Regular (400) with pretty line wrap avoiding orphans */
+body, p, li, blockquote, small, figcaption {
+  font-weight: 400;
+  text-wrap: pretty;
+}
+
+/* Smooth scrolling & overflow constraints */
+html {
+  overflow-x: hidden;
+}
+
+/* 
+  Mobile landscape / short viewport overrides
+  Reverts to desktop-like 2-column layout and removes hard 100dvh constraint
+*/
+@media (max-height: 600px) {
+  #hero-section {
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    padding: 0.5rem !important;
+  }
+
+  .hero-main-container {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Force 2-column desktop layout on landscape/short screens */
+  .hero-bento-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Force Left and Right columns to behave as flex columns like desktop */
+  .hero-left-column,
+  .hero-right-column {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  .hero-right-column > div {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Column 1 items */
+  .hero-card-brand {
+    order: 1 !important;
+    grid-column: auto !important;
+    min-height: 170px !important;
+    padding: 0.75rem !important;
+    flex: 1 1 auto !important;
+  }
+
+  .hero-card-specs {
+    order: 2 !important;
+    grid-column: auto !important;
+    flex: 0 0 auto !important;
+  }
+
+  .hero-card-ticker {
+    order: 3 !important;
+    grid-column: auto !important;
+    padding: 0.25rem 0 0.25rem 0.5rem !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* Column 2 items */
+  .hero-card-hello {
+    order: 1 !important;
+    grid-column: auto !important;
+    min-height: 130px !important;
+    padding: 0.5rem !important;
+    flex: 1 1 auto !important;
+  }
+
+  .hero-card-team {
+    order: 2 !important;
+    grid-column: auto !important;
+    aspect-ratio: auto !important;
+    min-height: 130px !important;
+    flex: 1 1 auto !important;
+  }
+}
+
+/* 
+  Mobile portrait (<640px) vertical layout & gap elimination
+  Order:
+  1. Big brand card (absorbing leftover space)
+  2. Photo card
+  3. 3 small spec blocks
+  4. Ticker at the very bottom
+*/
+@media (max-width: 639px) {
+  #hero-section {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    padding: 0.5rem !important;
+  }
+
+  .hero-main-container {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  .hero-bento-grid {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .hero-left-column,
+  .hero-right-column,
+  .hero-right-column > div {
+    display: contents !important;
+  }
+
+  /* 1. Top Card 2a (brand) grows to absorb all remaining vertical space */
+  .hero-card-brand {
+    order: 1 !important;
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding: 0.75rem !important;
+  }
+
+  /* 2. Photo card comes immediately after big brand card */
+  .hero-card-team {
+    order: 2 !important;
+    flex: 0 0 auto !important;
+    border-radius: 0.75rem !important;
+    overflow: hidden !important;
+    max-height: 155px !important;
+  }
+
+  /* 3. 3 small spec blocks */
+  .hero-card-specs {
+    order: 3 !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* 4. Ticker at the very bottom */
+  .hero-card-ticker {
+    order: 4 !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0.75rem !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Make native browser scrollbar completely invisible */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+html, body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* 
+  Crisp text marker highlights:
+  - Form-fitting rectangular highlight behind text
+  - Uses exact box-decoration-break clone with subtle horizontal padding
+  - Zero negative margin prevents browser line-breaker from detaching single glyphs
+*/
+.mark-peach {
+  display: inline;
+  background-color: #FFAD85;
+  color: #181818;
+  padding: 0.05em 0.22em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-radius: 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.mark-green {
+  display: inline;
+  background-color: #8FE06E;
+  color: #181818;
+  padding: 0.05em 0.22em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-radius: 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* Плавное выкатывание зелёного маркера слева направо */
+@keyframes markSlideInLeft {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.mark-green-animated {
+  position: relative;
+  display: inline-block;
+  color: #181818;
+  padding: 0.05em 0.22em;
+  z-index: 1;
+}
+
+.mark-green-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #8FE06E;
+  z-index: -1;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: markSlideInLeft 1s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
+  will-change: transform;
+}
+
+.mark-rose {
+  display: inline;
+  background-color: #F27A93;
+  color: #181818;
+  padding: 0.05em 0.22em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-radius: 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* Crisp, pure brand gradient for scroll progress indicator without sRGB dirty mud */
+.brand-scroll-gradient {
+  background-image: linear-gradient(90deg, #F27A93 0%, #FFAD85 42%, #DCED73 72%, #8FE06E 100%);
+  background-image: linear-gradient(in oklch to right, #F27A93 0%, #FFAD85 45%, #8FE06E 100%);
+}
+
+/* Variable font weight morph animation for typography specimens */
+@keyframes variableWeightMorph {
+  0% {
+    font-variation-settings: 'wght' 200;
+    font-weight: 200;
+  }
+  100% {
+    font-variation-settings: 'wght' 850;
+    font-weight: 850;
+  }
+}
+
+.animate-variable-weight {
+  animation: variableWeightMorph 2.4s ease-in-out infinite alternate;
+  will-change: font-variation-settings, font-weight;
+}
+
+/* ==========================================================================
+   Smooth Bento Edge-Scaling Entrance Animations
+   - Элегантное микро-пружинное масштабирование из 4 граней и углов
+   - Мягкий запуск с деликатным микро-перелётом (+1.8–2%) без перекрытия соседних блоков
+   ========================================================================== */
+
+/* 1. Хедер: деликатный пружинный вылет с верхнего края */
+@keyframes heroHeaderScaleTop {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.95, 0.48, 1);
+  }
+  62% {
+    opacity: 1;
+    transform: scale3d(1.008, 1.02, 1);
+  }
+  84% {
+    transform: scale3d(0.998, 0.996, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate-slide-header {
+  transform-origin: top center;
+  animation: heroHeaderScaleTop 1.05s cubic-bezier(0.16, 0.98, 0.24, 1) 0.05s both;
+  will-change: transform, opacity;
+}
+
+/* 2a. Левый главный блок: пружинный вылет с левого края */
+@keyframes heroLeftScaleLeft {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.52, 0.68, 1);
+  }
+  62% {
+    opacity: 1;
+    transform: scale3d(1.02, 1.012, 1);
+  }
+  84% {
+    transform: scale3d(0.996, 0.998, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate-slide-left {
+  transform-origin: left center;
+  animation: heroLeftScaleLeft 1.1s cubic-bezier(0.16, 0.98, 0.24, 1) 0.14s both;
+  will-change: transform, opacity;
+}
+
+/* 2b. Нижние 3 блока спецификации: деликатный вылет из углов и снизу */
+@keyframes heroBottomLeftScale {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.52, 0.52, 1);
+  }
+  62% {
+    opacity: 1;
+    transform: scale3d(1.018, 1.018, 1);
+  }
+  84% {
+    transform: scale3d(0.996, 0.996, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes heroBottomCenterScale {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.68, 0.48, 1);
+  }
+  62% {
+    opacity: 1;
+    transform: scale3d(1.012, 1.02, 1);
+  }
+  84% {
+    transform: scale3d(0.998, 0.996, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes heroBottomRightScale {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.52, 0.52, 1);
+  }
+  62% {
+    opacity: 1;
+    transform: scale3d(1.018, 1.018, 1);
+  }
+  84% {
+    transform: scale3d(0.996, 0.996, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate-slide-bottom-left {
+  transform-origin: bottom left;
+  animation: heroBottomLeftScale 1.05s cubic-bezier(0.16, 0.98, 0.24, 1) 0.22s both;
+  will-change: transform, opacity;
+}
+
+.animate-slide-bottom {
+  transform-origin: bottom center;
+  animation: heroBottomCenterScale 1.05s cubic-bezier(0.16, 0.98, 0.24, 1) 0.28s both;
+  will-change: transform, opacity;
+}
+
+.animate-slide-bottom-right {
+  transform-origin: bottom right;
+  animation: heroBottomRightScale 1.05s cubic-bezier(0.16, 0.98, 0.24, 1) 0.34s both;
+  will-change: transform, opacity;
+}
+
+/* 3a. Верхний правый блок (дудл): вылет с верхнего правого угла */
+@keyframes heroRightTopScale {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.52, 0.52, 1);
+  }
+  62% {
+    opacity: 1;
+    transform: scale3d(1.018, 1.018, 1);
+  }
+  84% {
+    transform: scale3d(0.996, 0.996, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate-slide-right-top {
+  transform-origin: top right;
+  animation: heroRightTopScale 1.1s cubic-bezier(0.16, 0.98, 0.24, 1) 0.22s both;
+  will-change: transform, opacity;
+}
+
+/* Анимация векторного дудла Hello: аккуратное появление */
+@keyframes helloDoodleEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  62% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  84% {
+    transform: scale(0.996);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-hello-doodle {
+  animation: helloDoodleEntrance 1.1s cubic-bezier(0.16, 0.98, 0.24, 1) 0.32s both;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+/* 3b. Нижний правый блок (фото): вылет с нижнего правого угла */
+@keyframes heroRightBottomScale {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.52, 0.52, 1);
+  }
+  62% {
+    opacity: 1;
+    transform: scale3d(1.018, 1.018, 1);
+  }
+  84% {
+    transform: scale3d(0.996, 0.996, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate-slide-right-bottom {
+  transform-origin: bottom right;
+  animation: heroRightBottomScale 1.1s cubic-bezier(0.16, 0.98, 0.24, 1) 0.32s both;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   Camera Snapshot / Shutter Flash Effect («Чик — и сделан кадр»)
+   ========================================================================== */
+
+/* Вспышка фотокамеры: мягкий деликатный блик */
+@keyframes cameraShutterFlash {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-shutter-flash {
+  animation: cameraShutterFlash 0.5s ease-out forwards;
+}
+
+/* Мягкая легкая отдача объектива */
+@keyframes lensRecoil {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.985);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-lens-recoil {
+  animation: lensRecoil 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ==========================================================================
+   Pattern Section Conveyor Drift Animation (Вариант 2: Плавный дрейф пути)
+   Паттерн медленно плывет вдоль направления траекторий (под углом 45°),
+   сохраняя монолитность векторных путей без разрывов и швов.
+   ========================================================================== */
+
+@keyframes patternConveyorFlow {
+  0% {
+    transform: rotate(45deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(45deg) translate3d(-140px, -70px, 0);
+  }
+  100% {
+    transform: rotate(45deg) translate3d(0, 0, 0);
+  }
+}
+
+.animate-pattern-conveyor {
+  animation: patternConveyorFlow 22s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* ==========================================================================
+   Lightbox & Modal Interactive Animations
+   ========================================================================== */
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(16px);
+  }
+}
+
+@keyframes lightboxPopIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.92, 0.92, 1);
+  }
+  60% {
+    opacity: 1;
+    transform: scale3d(1.015, 1.015, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes lightboxSlideNext {
+  0% {
+    opacity: 0;
+    transform: translate3d(36px, 0, 0) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes lightboxSlidePrev {
+  0% {
+    opacity: 0;
+    transform: translate3d(-36px, 0, 0) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-lightbox-fade {
+  animation: lightboxFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-lightbox-pop {
+  animation: lightboxPopIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-next {
+  animation: lightboxSlideNext 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-prev {
+  animation: lightboxSlidePrev 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Optimization: Modern content-visibility for off-screen sections to free CPU/GPU */
+.section-optimize-render {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 720px;
+}
+
+/* ==========================================================================
+   Interactive Particle Burst / Explosion Animation & Tactile Physics
+   ========================================================================== */
+@keyframes particleBurstFly {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(0.15) rotate(0deg);
+  }
+  14% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate3d(calc(var(--burst-dx, 0px) * 0.52), calc(var(--burst-dy, 0px) * 0.52), 0) scale(calc(var(--burst-scale, 1) * 1.18)) rotate(calc(var(--burst-rot, 0deg) * 0.35));
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate3d(var(--burst-dx, 0px), calc(var(--burst-dy, 0px) + var(--burst-grav, 14px) * 0.4), 0) scale(var(--burst-scale, 1)) rotate(var(--burst-rot, 0deg));
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate3d(calc(var(--burst-dx, 0px) * 1.18), calc(var(--burst-dy, 0px) + var(--burst-grav, 18px)), 0) scale(calc(var(--burst-scale, 1) * 0.32)) rotate(calc(var(--burst-rot, 0deg) * 1.4));
+  }
+}
+
+@keyframes shockwaveRingPulse {
+  0% {
+    width: 24px;
+    height: 24px;
+    opacity: 0.85;
+    border: 3px solid var(--wave-color, #FFAD85);
+    box-shadow: 0 0 16px var(--wave-color, #FFAD85);
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  50% {
+    opacity: 0.6;
+    border-width: 2px;
+  }
+  100% {
+    width: 24px;
+    height: 24px;
+    opacity: 0;
+    border: 1px solid var(--wave-color, #FFAD85);
+    box-shadow: 0 0 32px var(--wave-color, #FFAD85);
+    transform: translate(-50%, -50%) scale(5.2);
+  }
+}
+
+.animate-burst-particle {
+  animation-name: particleBurstFly;
+  animation-timing-function: cubic-bezier(0.12, 0.95, 0.28, 1);
+  animation-fill-mode: forwards;
+}
+
+.animate-shockwave-ring {
+  animation: shockwaveRingPulse 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes springPopReaction {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  18% {
+    transform: scale3d(0.92, 0.92, 1);
+  }
+  42% {
+    transform: scale3d(1.08, 1.08, 1);
+  }
+  68% {
+    transform: scale3d(0.98, 0.98, 1);
+  }
+  86% {
+    transform: scale3d(1.012, 1.012, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate-pop-squish {
+  animation: springPopReaction 0.48s cubic-bezier(0.22, 1.25, 0.36, 1) forwards;
+}
+
+/* ==========================================================================
+   AI Stars Generation Animation (Аутентичные AI-звёзды в секции внедрения)
+   ========================================================================== */
+@keyframes aiStarTwinkle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 2px rgba(255, 173, 133, 0.4));
+  }
+  50% {
+    transform: scale(1.12) rotate(3deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 173, 133, 0.65));
+  }
+}
+
+@keyframes aiStarSatellite {
+  0%, 100% {
+    transform: translateY(0px) scale(0.92);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-2.5px) scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes aiHaloBreathe {
+  0%, 100% {
+    transform: scale(0.92);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.75;
+  }
+}
+
+.animate-ai-star-main {
+  animation: aiStarTwinkle 2.4s ease-in-out infinite;
+}
+
+.animate-ai-star-sub1 {
+  animation: aiStarSatellite 2.8s ease-in-out infinite 0.3s;
+}
+
+.animate-ai-star-sub2 {
+  animation: aiStarSatellite 2.2s ease-in-out infinite 0.7s;
+}
+
+.animate-ai-halo {
+  animation: aiHaloBreathe 3s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Hero ROI Ticker Marquee Animation
+   ========================================================================== */
+@keyframes heroTickerMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-hero-ticker {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  white-space: nowrap;
+  animation: heroTickerMarquee 26s linear infinite;
+}
+
+.animate-hero-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* ==========================================================================
+   Custom Cursor CSS (скрытие системного курсора на компьютерах)
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active input,
+  body.custom-cursor-active textarea,
+  body.custom-cursor-active select,
+  body.custom-cursor-active [role="button"],
+  body.custom-cursor-active .cursor-pointer {
+    cursor: none !important;
+  }
+}
+

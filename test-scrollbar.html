@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+  body { height: 200vh; background: #fff; margin: 0; }
+  .custom-scrollbar {
+    position: fixed;
+    right: 4px;
+    top: 64px; /* below header */
+    bottom: 8px;
+    width: 6px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .custom-scrollbar.is-active {
+    opacity: 1;
+  }
+  .custom-scrollbar-thumb {
+    position: absolute;
+    width: 100%;
+    /* calligraphic brush effect */
+    background: var(--text-accent, #645cbb);
+    border-radius: 100% 100% 100% 100% / 5% 5% 5% 5%;
+    box-shadow: 0 0 4px rgba(100, 92, 187, 0.4);
+    /* Maybe some clip-path or complex border radius */
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    border-bottom-left-radius: 50% 100%;
+    border-bottom-right-radius: 50% 100%;
+  }
+</style>
+</head>
+<body>
+<div class="custom-scrollbar is-active">
+  <div class="custom-scrollbar-thumb" style="top: 10%; height: 20%;"></div>
+</div>
+</body>
+</html>
